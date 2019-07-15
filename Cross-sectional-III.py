@@ -25,7 +25,6 @@ MAX_LONG_POSITION_SIZE = 2.0 / TOTAL_POSITIONS
 
 
 def initialize(context):
-    context.max_turnover = 0.65
     algo.attach_pipeline(make_pipeline(), 'long_short_equity_template')
 
     # Attach the pipeline for the risk model factors that we
@@ -175,10 +174,7 @@ def rebalance(context, data):
             min=-MAX_SHORT_POSITION_SIZE,
             max=MAX_LONG_POSITION_SIZE
         ))
-    
-    max_turnover = opt.MaxTurnover(context.max_turnover)
-    constraints.append(max_turnover)
-    
+        
     # Put together all the pieces we defined above by passing
     # them into the algo.order_optimal_portfolio function. This handles
     # all of our ordering logic, assigning appropriate weights
